@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--  在Spring配置文件中配置UserDaoImpl  -->
+    <!--  id 名字任意，class是需要配置的接口实现类的对象class路径  -->
+    <!--  id 是 bean 的唯一标识,默认对象的使用范围是单例的  -->
+    <bean id="userDao" class="com.dreamplume.impl.UserImpl"></bean>
+    <!--  scope:prototype（多例）  -->
+    <bean id="userDao2" class="com.dreamplume.impl.UserImpl" scope="prototype"></bean>
+    <!--  Bean生命周期配置：init-method:指定类中的初始化方法的名称；destroy-method:指定类中的销毁方法名称；  -->
+    <bean id="userDao3" class="com.dreamplume.impl.UserImpl" scope="prototype" init-method="init" destroy-method="destroy"></bean>
+    <!--  Bean中默认时返回的是类的晚餐构造方法,以下可以使用对象的工厂静态实例方法  -->
+    <bean id="userDao4" class="com.dreamplume.factory.staticFactory.UserDaoFactory" factory-method="getUserDao"></bean>
+    <!-- 使用工厂的实例方法实例化 -->
+    <bean id="exampleUserDaoFactory" class="com.dreamplume.factory.exampleFactory.UserDaoFactory"></bean>
+    <bean id="userDao5" factory-bean="exampleUserDaoFactory" factory-method="getUserDao"></bean>
+
+    <!--  UserService 依赖 UserDao 对象来实现其中的方法:依赖注入  -->
+    <bean id="UserDaoService" class="com.dreamplume.service.impl.UserServiceImpl">
+        <!--
+            创建的 UserServiceImpl 对象中的 set() 方法名称中 set 后面的名称,填写时第一个字母小写
+            ref 后面填写的参数是 set() 方法中所有获取的对象的 bean 对象的 id 名称
+          -->
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <!--
+        xmlns:p="http://www.springframework.org/schema/p"
+        创建 p 命名空间注入本质也是 set() 方法注入,但是相互对于 set() 方阿飞更加的方便,主要体现在配置文件中
+        但是上面的 set() 方法的注入是比较常用的,因为考虑到要注入多个 对象,会导致其中变得很长
+     -->
+    <bean id="UserDaoService2" class="com.dreamplume.service.impl.UserServiceImpl" p:userDao-ref="userDao"/>
+    <!--  使用构造方法来实现依赖注入  -->
+    <bean id="UserDaoService3" class="com.dreamplume.service.impl.UserServiceImpl">
+        <!--    name 填写的是 UserServiceImpl 对象中的属性名称 ref 是容器内 bean 的 id 名称    -->
+        <constructor-arg name="userDao" ref="userDao"></constructor-arg>
+    </bean>
+
+    <bean id="UserDaoService4" class="com.dreamplume.service.impl.UserServiceImpl">
+        <!--    name 填写的是 UserServiceImpl 对象中的属性名称 ref 是容器内 bean 的 id 名称    -->
+        <property name="name" value="Monica"></property>
+        <property name="age" value="19"></property>
+    </bean>
+
+
+    <bean id="User1" class="com.dreamplume.service.domain.User">
+        <property name="name" value="Monica"/>
+        <property name="age" value="19"/>
+    </bean>
+    <bean id="User2" class="com.dreamplume.service.domain.User">
+        <property name="name" value="Hahn"/>
+        <property name="age" value="21"/>
+    </bean>
+    <bean id="UserDaoService5" class="com.dreamplume.service.impl.UserServiceImpl">
+       <property name="list">
+           <list>
+               <value>Monica</value>
+               <value>Hahn</value>
+           </list>
+       </property>
+
+        <property name="map">
+            <map>
+                <entry key-ref="User1">
+                    <value>1</value>
+                </entry>
+                <entry key-ref="User2">
+                    <value>2</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="a">A</prop>
+                <prop key="b">B</prop>
+                <prop key="c">C</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="UserClass" class="com.dreamplume.service.impl.UserClassDemo"/>
+</beans>
