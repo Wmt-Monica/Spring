@@ -91,4 +91,13 @@ public class AnnoTest {
         System.out.println(conn);
         conn.close();
     }
+
+    // 在 applicationContext.xml 配置文件上引用jdbc.properties配置文件的连接池的配置信息
+    @Test
+    public void test6() throws SQLException {
+        ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
+        DataSource source = (DataSource) app.getBean("jdbcC3P0Pool2");
+        Connection conn = source.getConnection();
+        System.out.println(conn);
+    }
 }
