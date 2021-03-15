@@ -4,9 +4,12 @@ import com.dreamplume.impl.UserImpl;
 import com.dreamplume.service.dao.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 /**
@@ -18,6 +21,7 @@ import javax.annotation.Resource;
 // 使用注解方便程序执行直接扫描该类对象的组注解
 //@Component("UserService")  // 参数类似 xml 文件中的 bean 类的 id 唯一属性
 @Service("UserService")  // 与上面的注解功能一样,是对象bean对象的初始化,不过标示用于 service 包下的,可读性高
+@Scope(value = "prototype")  // Scope 注解,指定对象额使用范围
 public class UserServiceImpl implements UserService {
 //    @Autowired  //  在使用字段上用于根据类型依赖注入
 //    @Qualifier("UserImpl")  //  结合 @Autowired 一起使用,用于名称的依赖注入
@@ -43,5 +47,15 @@ public class UserServiceImpl implements UserService {
 
     public void method() {
         System.out.println("USerServiceImpl method is running....");
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("UserServerImpl 初始化.....");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("UserServerImpl 销毁....");
     }
 }

@@ -107,9 +107,20 @@ public class AnnoTest {
     public void test7() {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserServiceImpl userService = (UserServiceImpl) app.getBean("UserService");
+        UserServiceImpl userService2 = (UserServiceImpl) app.getBean("UserService");
         UserImpl user = userService.getUserImpl();
         user.method();
         System.out.println("name = "+user.getName());
         System.out.println("age = "+user.getAge());
+
+        // 使用 ClassPathXmlApplicationContext 类的 close() 释放资源
+        // 来显示 userService 对象的销毁方法的执行
+        ((ClassPathXmlApplicationContext) app).close();
+
+        if (userService.hashCode() == userService2.hashCode()) {
+            System.out.println("是默认的单例状态");
+        }else {
+            System.out.println("是指定的多例状态");
+        }
     }
 }
