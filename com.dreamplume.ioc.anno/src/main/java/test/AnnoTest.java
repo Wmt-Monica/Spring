@@ -1,7 +1,9 @@
-package com.dreamplume.test;
+package test;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
+import com.dreamplume.impl.UserImpl;
+import com.dreamplume.service.impl.UserServiceImpl;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -13,16 +15,16 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
- * @Classname Test
+ * @Classname AnnoTest
  * @Description TODO
- * @Date 2021/3/14 13:28
+ * @Date 2021/3/15 9:11
  * @Created by 翊
  */
 public class AnnoTest {
 
     // 创建一个 c3p0 连接池对象
     @Test
-   public void test1() throws Exception {
+    public void test1() throws Exception {
         ComboPooledDataSource source = new ComboPooledDataSource();
         source.setDriverClass("com.mysql.jdbc.properties.Driver");
         source.setJdbcUrl("jdbc.properties:mysql://localhost:3306/formdata");
@@ -35,9 +37,9 @@ public class AnnoTest {
         System.out.println(conn);
         // 归还Connection对象到连接池
         conn.close();
-   }
+    }
 
-   // 创建一个 druid 连接池对象
+    // 创建一个 druid 连接池对象
     @Test
     public void test2() throws SQLException {
         DruidDataSource source = new DruidDataSource();
@@ -99,5 +101,15 @@ public class AnnoTest {
         DataSource source = (DataSource) app.getBean("jdbcC3P0Pool2");
         Connection conn = source.getConnection();
         System.out.println(conn);
+    }
+
+    @Test
+    public void test7() {
+        ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserServiceImpl userService = (UserServiceImpl) app.getBean("UserService");
+        UserImpl user = userService.getUserImpl();
+        user.method();
+        System.out.println("name = "+user.getName());
+        System.out.println("age = "+user.getAge());
     }
 }

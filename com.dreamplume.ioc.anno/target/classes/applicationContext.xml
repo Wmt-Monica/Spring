@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <bean id="jdbcC3P0Pool" class="com.mchange.v2.c3p0.ComboPooledDataSource">
        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test"/>
@@ -15,4 +17,26 @@
         <property name="username" value="root"/>
         <property name="password" value="mengmengmeng0501"/>
     </bean>
+
+    <!--  加载 jdbc.properties 文件到 applicationContext.xml 配置文件中  -->
+    <context:property-placeholder location="jdbc.properties"/>
+
+    <bean id="jdbcC3P0Pool2" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+<!--    <bean id="UserDao" class="com.dreamplume.impl.UserImpl">-->
+<!--        <property name="name" value="Monica"/>-->
+<!--        <property name="age" value="19"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="UserService" class="com.dreamplume.service.impl.UserServiceImpl">-->
+<!--        <property name="userImpl" ref="UserDao"/>-->
+<!--    </bean>-->
+
+    <!--  使用注解来减缓 xml 文件的配置,此处配置组件扫描,在以下参数的报下的所有类,接口,子包都可以扫描到  -->
+    <context:component-scan base-package="com.dreamplume"/>
 </beans>

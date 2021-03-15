@@ -1,4 +1,4 @@
-package com.dreamplume.test;
+package test;
 
 import com.dreamplume.dao.UserDao;
 import com.dreamplume.service.domain.User;
