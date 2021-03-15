@@ -16,10 +16,16 @@ import org.springframework.stereotype.Repository;
 @Repository("UserImpl")  // 与上面的注解功能一样,不过时 dao 包下的 bean 初始化注解,有可读性
 public class UserImpl implements UserDao {
 
-    @Value("Monica")  // 普通的数据注入
+    /*
+        结合 applicationContext.xml 配置文件对 jdbc.properties 的引入
+        <context:property-placeholder location="jdbc.properties"/>
+        我们可以使用在jdbc.properties文件中对 name age 属性的属性值的信
+        来对其进行使用 "${参数名称}" 来获取其属性值
+     */
+    @Value("${name}")  // 普通的数据注入
     private String name;
 
-    @Value("19")  // 普通的苏剧注入
+    @Value("${age}")  // 普通的苏剧注入
     private int age;
 
     public String getName() {
