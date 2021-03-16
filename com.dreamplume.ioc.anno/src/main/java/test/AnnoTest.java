@@ -4,12 +4,15 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.dreamplume.impl.UserImpl;
 import com.dreamplume.service.impl.UserServiceImpl;
+import com.dreamplume.util.SpringUtil;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -122,5 +125,17 @@ public class AnnoTest {
         }else {
             System.out.println("是指定的多例状态");
         }
+    }
+
+    @Test
+    public void test8() throws Exception {
+        //  创建的对象任然是 ApplicationContext 对象,但是实例化使用
+        // AnnotationConfigApplication() 实现类,传入的是替代成 applicationContext.xml
+        // Spring 容器配置类的字节对象
+        ApplicationContext app = new AnnotationConfigApplicationContext(SpringUtil.class);
+        DataSource source = (DataSource) app.getBean("jdbcC3P0Pool2");
+        Connection conn = source.getConnection();
+        System.out.println(conn);
+
     }
 }

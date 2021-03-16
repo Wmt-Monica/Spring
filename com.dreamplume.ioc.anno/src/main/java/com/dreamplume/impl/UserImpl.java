@@ -2,8 +2,11 @@ package com.dreamplume.impl;
 
 import com.dreamplume.dao.UserDao;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.PreDestroy;
 
 
 /**
@@ -14,8 +17,10 @@ import org.springframework.stereotype.Repository;
  */
 //@Component("UserImpl")
 @Repository("UserImpl")  // 与上面的注解功能一样,不过时 dao 包下的 bean 初始化注解,有可读性
-public class UserImpl implements UserDao {
 
+// 使用 @PropertySource 其中参数填写 classpath: 后面填写要引入的配置文件
+@PropertySource("classpath:jdbc.properties")
+public class UserImpl implements UserDao {
     /*
         结合 applicationContext.xml 配置文件对 jdbc.properties 的引入
         <context:property-placeholder location="jdbc.properties"/>
@@ -47,4 +52,5 @@ public class UserImpl implements UserDao {
     public void method() {
         System.out.println("UserImpl method is running....");
     }
+
 }

@@ -19,14 +19,14 @@
     </bean>
 
     <!--  加载 jdbc.properties 文件到 applicationContext.xml 配置文件中  -->
-    <context:property-placeholder location="jdbc.properties"/>
+<!--    <context:property-placeholder location="jdbc.properties"/>-->
 
-    <bean id="jdbcC3P0Pool2" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${jdbc.driver}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-    </bean>
+<!--    <bean id="jdbcC3P0Pool2" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+<!--        <property name="driverClass" value="${jdbc.driver}"/>-->
+<!--        <property name="jdbcUrl" value="${jdbc.url}"/>-->
+<!--        <property name="user" value="${jdbc.username}"/>-->
+<!--        <property name="password" value="${jdbc.password}"/>-->
+<!--    </bean>-->
 
 <!--    <bean id="UserDao" class="com.dreamplume.impl.UserImpl">-->
 <!--        <property name="name" value="Monica"/>-->
