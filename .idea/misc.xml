@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/com.creamplume.spring/pom.xml" />
         <option value="$PROJECT_DIR$/com.dreamplume.ioc.anno/pom.xml" />
         <option value="$PROJECT_DIR$/com.dreamplume.spring.aop/pom.xml" />
+        <option value="$PROJECT_DIR$/com.dreamplume.jdbcTemplate/pom.xml" />
       </list>
     </option>
   </component>

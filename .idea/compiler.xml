@@ -6,16 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="com.dreamplume.spring.aop" />
+        <module name="com.dreamplume.ioc.anno" />
         <module name="com.dreamplume.ioc" />
         <module name="com.creamplume.spring" />
-        <module name="com.dreamplume.ioc.anno" />
+        <module name="com.dreamplume.spring.aop" />
+        <module name="com.dreamplume.jdbcTemplate" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="com.creamplume.spring" target="1.5" />
       <module name="com.dreamplume.ioc" target="1.5" />
       <module name="com.dreamplume.ioc.anno" target="1.5" />
+      <module name="com.dreamplume.jdbcTemplate" target="1.5" />
       <module name="com.dreamplume.spring" target="1.5" />
       <module name="com.dreamplume.spring.aop" target="1.5" />
     </bytecodeTargetLevel>
