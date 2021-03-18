@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class AopJunitTest {
-    @Resource(name = "target") // 按照字段类型中根据名称来寻找bean对象
+    @Autowired // 按照字段类型中根据名称来寻找bean对象
     private TargetInterface target;
 
     @Test
