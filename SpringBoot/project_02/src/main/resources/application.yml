@@ -1,0 +1,5 @@
+# application 后缀名可以是 properties 或者是如下的形式的 yml 或者 yaml 后缀
+server:
+  port: 8081 # 端口号
+  servlet:
+    context-path: /project_02  # 启动路径

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>cn.dreamplume</groupId>
+    <artifactId>project_08</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>project_08</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 引入SpringBoot内嵌Tomcat对jsp的解析依赖，不添加解析不了jsp -->
+        <!-- 仅仅只是展示 jsp 页面，只添加以下一个依赖 -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+    </dependencies>
+
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <!--
+            SpringBoot项目默认推荐使用的前端引擎是thymeleaf
+            现在我们要使用SpringBoot集成jsp,手动指定jsp最后编译的路径
+            而且SpringBoot集成jsp编译jsp的路径是SpringBoot规定好的位置
+            META-INF/resources
+        -->
+        <resources>
+            <resource>
+                <!-- 源文件 -->
+                <directory>src/main/webapp</directory>
+                <!--指定编译到META-INF/resources -->
+                <targetPath>MeTA-INF/resources</targetPath>
+                <!-- 指定源文件夹中的哪个资源要编译进行 -->
+                <includes>
+                    <include>*.*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>

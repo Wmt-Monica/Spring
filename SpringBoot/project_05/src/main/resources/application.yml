@@ -1,0 +1,21 @@
+# 激活使用的 application 配置文件
+
+# http://localhost:8081/dev/t
+#spring:
+#  profiles:
+#    active: develop
+
+# http://localhost:8082/test/t
+#spring:
+#  profiles:
+#    active: test
+
+# http://localhost:8083/quasiProduct/t
+#spring:
+#  profiles:
+#    active: quasiProduct
+
+# http://localhost:8084/product/t
+#spring:
+#  profiles:
+#    active: product
